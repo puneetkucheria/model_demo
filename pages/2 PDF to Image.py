@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 import json
-from functions import store_file_s3_foler
+from functions import store_file_s3_folder
 
 if 's3-path' not in st.session_state:
     # st.switch_page("../home.py")
@@ -28,7 +28,7 @@ if uploaded_file is None:
         Submit = st.form_submit_button(label='Submit')
 
 if Submit and uploaded_file is not None:
-    store_path = store_file_s3_foler(uploaded_file)
+    store_path = store_file_s3_folder(uploaded_file)
     st.success(f'File {store_path} is successfully saved!')
     response = requests.post("http://127.0.0.1:8001/pdf_img?file_path="+str(store_path))
     # st.success(response.text)

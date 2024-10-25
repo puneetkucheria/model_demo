@@ -1,6 +1,6 @@
 import streamlit as st
 import requests
-from functions import store_file_s3_foler
+from functions import store_file_s3_folder
 from PIL import Image
 
 if 's3-path' not in st.session_state:
@@ -29,10 +29,10 @@ if uploaded_file is None:
 
 if Submit and uploaded_file is not None:
     # store_path = store_file_s3_foler(uploaded_file._file_urls.upload_url)
-    store_path = store_file_s3_foler(uploaded_file)
+    store_path = store_file_s3_folder(uploaded_file)
     st.success(f'File {store_path} is successfully saved!')
     # response = requests.post(f"http://127.0.0.1:8000/pkg_detect?file="+str(uploaded_file._file_urls.upload_url))
-    response = requests.post("http://127.0.0.1:8000/pkg_detect?file="+str(store_path))
+    response = requests.post("http://127.0.0.1:8003/pkg_detect?file="+str(store_path))
     st.success(response.text)
     st.image(str(store_path))
     st.image(response.text.replace('"',''))
